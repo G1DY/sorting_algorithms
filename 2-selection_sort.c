@@ -12,12 +12,10 @@ void swap_ints(int *a, int *b)
 	*a = *b;
 	*b = temp;
 }
-
 /**
  * selection_sort - Sorts an array of integers in ascending order
  * @array: An array of integers
  * @size: Size of the array
- *
  * Description: Prints the array after each swap
  */
 void selection_sort(int *array, size_t size)
@@ -27,7 +25,6 @@ void selection_sort(int *array, size_t size)
 
 	if (array == NULL || size < 2)
 		return;
-
 	for (i = 0; i < size - 1; i++)
 	{
 		min = array + i;

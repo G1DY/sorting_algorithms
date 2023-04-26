@@ -4,30 +4,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*Prototypes for the functions print_array and print_list*/
-void print_list(const listint_t *list);
-void print_array(const int *array, size_t size);
-
-/*sorting algorithms prototypes*/
-void bubble_sort(int *array, size_t size);
-void insertion_sort_list(listint_t **list);
-void selection_sort(int *array, size_t size);
-void quick_sort(int *array, size_t size);
-void shell_sort(int *array, size_t size);
-void cocktail_sort_list(listint_t **list);
-void counting_sort(int *array, size_t size);
-void merge_sort(int *array, size_t size);
-void heap_sort(int *array, size_t size);
-void radix_sort(int *array, size_t size);
-void bitonic_sort(int *array, size_t size);
-void quick_sort_hoare(int *array, size_t size);
-void sort_deck(deck_node_t **deck);
-
-/*direction macros for the  bitonic sort*/
 #define UP 0
 #define DOWN 1
 
-/*data structure for doubly linked list*/
+/**
+ * enum bool - Enumeration of boolean values
+ * @false: Equals 0
+ * @true: Equals 1
+ */
+typedef enum bool
+{
+	false = 0,
+	true
+}bool;
 
 /**
  * struct listint_s - Doubly linked list node
@@ -43,16 +32,20 @@ typedef struct listint_s
     struct listint_s *next;
 } listint_t;
 
-/*enumerates boolean values*/
-/**
- * enum bool - enumeration of boolean values
- * @false: equals 0
- * @true: equals 1
- */
-typedef enum bool
-{
-	false = 0,
-	true
-}bool;
+void print_array(const int *array, size_t size);
+void print_list(const listint_t *list);
+
+void bubble_sort(int *array, size_t size);
+void insertion_sort_list(listint_t **list);
+void selection_sort(int *array, size_t size);
+void quick_sort(int *array, size_t size);
+void shell_sort(int *array, size_t size);
+void cocktail_sort_list(listint_t **list);
+void counting_sort(int *array, size_t size);
+void merge_sort(int *array, size_t size);
+void heap_sort(int *array, size_t size);
+void radix_sort(int *array, size_t size);
+void bitonic_sort(int *array, size_t size);
+void quick_sort_hoare(int *array, size_t size);
 
 #endif

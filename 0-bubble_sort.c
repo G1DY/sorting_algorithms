@@ -21,7 +21,7 @@ void swap_integers(int *a, int *b)
  * @array: array of integers
  * @size: size of the array
  *
- * Description: print the array after each time you swap two elements
+ * Return: the array after each time you swap two elements
  */
 void bubble_sort(int *array, size_t size)
 {

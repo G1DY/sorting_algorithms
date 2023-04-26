@@ -3,6 +3,7 @@
  * swap_ints - Swaps two integers in an array
  * @a: First integer
  * @b: Second integer
+ *
  */
 void swap_ints(int *a, int *b)
 {
@@ -12,10 +13,12 @@ void swap_ints(int *a, int *b)
 	*a = *b;
 	*b = temp;
 }
+
 /**
  * selection_sort - Sorts an array of integers in ascending order
  * @array: An array of integers
  * @size: Size of the array
+ *
  * Description: Prints the array after each swap
  */
 void selection_sort(int *array, size_t size)

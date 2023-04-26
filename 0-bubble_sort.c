@@ -1,13 +1,13 @@
 #include "sort.h"
 
 /**
- * swap_integers - swaps two integers
+ * swap_ints - swaps two integersin an array
  * @a: first integer
  * @b: second integer
  *
  * Return: 0 always success
  */
-void swap_integers(int *a, int *b)
+void swap_ints(int *a, int *b)
 {
 	int temp;
 

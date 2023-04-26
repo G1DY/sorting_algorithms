@@ -10,7 +10,7 @@ void swap_ints(int *a, int *b)
 
 	temp = *a;
 	*a = *b;
-	*b = temp
+	*b = temp;
 }
 
 /**
@@ -30,18 +30,14 @@ void selection_sort(int *array, size_t size)
 
 	for (i = 0; i < size - 1; i++)
 	{
-		min = array + 1;
+		min = array + i;
 		for (j = i + 1; j < size; j++)
+			min = (array[j] < *min) ? (array + j) : min;
+
+		if ((array + i) != min)
 		{
-			if (array[j] < *min)
-			{
-				min = array + j;
-			}
-			if ((array + i) != min)
-			{
-				swap_ints(array + i, min);
-				print_array(array, size);
-			}
+			swap_ints(array + i, min);
+			print_array(array, size);
 		}
 	}
 }

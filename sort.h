@@ -27,9 +27,9 @@ typedef enum bool
  */
 typedef struct listint_s
 {
-    const int n;
-    struct listint_s *prev;
-    struct listint_s *next;
+	const int n;
+	struct listint_s *prev;
+	struct listint_s *prev;
 } listint_t;
 
 void print_array(const int *array, size_t size);

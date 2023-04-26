@@ -1,5 +1,4 @@
 #include "sort.h"
-
 /**
  * swap_integers - swaps two integersin an array
  * @a: first integer
@@ -19,7 +18,7 @@ void swap_integers(int *a, int *b)
  * @array: array of integers
  * @size: size of the array
  *
- * Return: the array after each time you swap two elements
+ * Description:prints an  array each time you swap two elements
  */
 void bubble_sort(int *array, size_t size)
 {

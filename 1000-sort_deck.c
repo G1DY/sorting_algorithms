@@ -1,79 +1,140 @@
 #include "deck.h"
-#include <stdlib.h>
+
+int strcmp_(const char *string1, const char *string2);
+char get_value(deck_node_t *card);
+void sort_deck_kind(deck_node_t **deck);
+void sort_deck_value(deck_node_t **deck);
+void sort_deck(deck_node_t **deck);
 
 /**
- * compare_cards - compares the cards by there suit
- *                 and next by value
- * @card_a: 1st card
- * @card_b: second card
- *
- */
-int compare_cards(const void *a, const void *b)
+  * strcmp_ - compares two strings
+  * @string1: first string to compare
+  * @string2: second string to compare
+  *
+  * Return: 0 always success
+  */
+int strcmp_(const char *string1, const char *string2)
 {
-    const card_t *card_a = *(const card_t **)a;
-    const card_t *card_b = *(const card_t **)b;
-
-    /*compare by suit*/
-    if (card_a->kind < card_b->kind)
+    while (*string1 && *string2 && *string1 == *string2)
     {
-        return -1;
-    }
-    else if (card_a->kind > card_b->kind)
-    {
-        return 1;
+        string1++;
+        string2++;
     }
 
-    /*if their suit are the same compare the cards with value*/
-    if (card_a->value < card_b->value)
-    {
-        return -1;
-    }
-    else if (card_a->value > card_b->value)
-    {
-        return 1;
-    }
-
-    /*the cards are equal*/
-    return 0;
+    if (*string1 != *string2)
+        return (*string1 - *string2);
+    return (0);
 }
 
 /**
- * sort_deck - a function that sorts a deck of cards
- * @count: counts the cards
+ * get_value - gets the numerical value of a card
+ * @card: pointer to a node of a card
  *
- * Return: sorted list using qsort function
+ * Return: numerical card value
+ */
+char get_value(deck_node_t *card)
+{
+    if (strcmp_(card->card->value, "Ace") == 0)
+		return (0);
+    if (strcmp_(card->card->value, "1") == 0)
+        return (1);
+    if (strcmp_(card->card->value, "2") == 0)
+        return (2);
+    if (strcmp_(card->card->value, "3") == 0)
+        return (3);
+    if (strcmp_(card->card->value, "4") == 0)
+        return (4);
+    if (strcmp_(card->card->value, "5") == 0)
+        return (5);
+    if (strcmp_(card->card->value, "6") == 0)
+        return (6);
+    if (strcmp_(card->card->value, "7") == 0)
+        return (7);
+    if (strcmp_(card->card->value, "8") == 0)
+        return (8);
+    if (strcmp_(card->card->value, "9") == 0)
+        return (9);
+    if (strcmp_(card->card->value, "10") == 0)
+        return (10);
+    if (strcmp_(card->card->value, "11") == 0)
+        return (11);
+    if (strcmp_(card->card->value, "12") == 0)
+        return (12);
+    return (13);
+}
+
+/**
+ * sort_deck - sort a deck of cards uses insertion algorithmn
+ * @deck: pointer to the head
+ *
+ */
+void sort_deck_kind(deck_node_t **deck)
+{
+    deck_node_t *count, *insert, *temp;
+
+    for (count = (*deck)->next; count != NULL; count = temp)
+    {
+        temp = count->next;
+        insert = count->prev;
+        while (insert != NULL && insert->card->kind > count->card->kind)
+        {
+            insert->next = count->next;
+            if (count->next != NULL)
+                    count->next->prev = insert;
+            count->prev = insert->next;
+            count->next = insert;
+            if (insert->prev != NULL)
+                    insert->prev->next = count;
+            else
+                    *deck = count;
+            insert->prev = count;
+            insert = count->prev;
+        }
+    }
+}
+
+/**
+ * sort_deck - sort a deck of cards uses insertion algorithmn
+ * @deck: pointer to head
+ *
+ */
+void sort_deck_value(deck_node_t **deck)
+{
+    deck_node_t *count, *insert, *temp;
+
+    for (count = (*deck)->next; count != NULL; count = temp)
+    {
+        temp = count->next;
+        insert = count->prev;
+        while (insert != NULL &&
+               insert->card->kind == count->card->kind &&
+               get_value(insert) > get_value(count))
+        {
+            insert->next = count->next;
+            if (count->next != NULL)
+                    count->next->prev = insert;
+            count->prev = insert->prev;
+            count->next = insert;
+            if (insert->prev != NULL)
+                    insert->prev->next = count;
+            else
+                    *deck = count;
+            insert->prev = count;
+            insert = count->prev;
+        }
+    }
+}
+
+/**
+ * sort_deck - Sort a deck of cards from ace to king and
+ *             from spades to diamonds.
+ * @deck: A pointer to the head of a deck_node_t doubly-linked list.
  */
 void sort_deck(deck_node_t **deck)
 {
-    /*count number of cards in deck*/
-    int i = 0;
-    int j = 0;
-    const card_t *cards[52];
-    deck_node_t *current = *deck;
+	if (deck == NULL || *deck == NULL || (*deck)->next == NULL)
+		return;
 
-    while (current != NULL)
-    {
-        i++;
-        current = current->next;
-    }
-
-    /*array of card pointers to sort*/
-    current = *deck;
-    for (j = 0; j < i; j++)
-    {
-        cards[j] = current->card;
-        current = current->next;
-    }
-
-    /*sort the array using qsort*/
-    qsort(cards, i, sizeof(card_t*), compare_cards);
-
-    /*update the linked list as a sorted list*/
-    current = *deck;
-    for (j = 0; j < i; j++)
-    {
-        current->card = cards[j];
-        current = current->next;
-    }
+	sort_deck_kind(deck);
+	sort_deck_value(deck);
 }
-
